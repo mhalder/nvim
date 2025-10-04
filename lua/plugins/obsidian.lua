@@ -85,13 +85,12 @@ return {
     new_notes_location = "notes",
 
     note_id_func = function(title)
+      if title then
+        return tostring(os.time()) .. "-" .. title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+      end
       local suffix = ""
-      if title ~= nil then
-        suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-      else
-        for _ = 1, 4 do
-          suffix = suffix .. string.char(math.random(65, 90))
-        end
+      for _ = 1, 4 do
+        suffix = suffix .. string.char(math.random(65, 90))
       end
       return tostring(os.time()) .. "-" .. suffix
     end,
@@ -109,7 +108,7 @@ return {
         modified = os.date("%Y-%m-%d"),
       }
 
-      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+      if note.metadata and not vim.tbl_isempty(note.metadata) then
         for k, v in pairs(note.metadata) do
           out[k] = v
         end

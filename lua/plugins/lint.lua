@@ -8,7 +8,6 @@ return {
       python = { "ruff" },
       terraform = { "tflint" },
       bash = { "shellcheck" },
-      ledger = { "hledger" },
       dockerfile = { "hadolint" },
     }
 

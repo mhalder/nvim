@@ -18,21 +18,13 @@ return {
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
         return
       end
-      local disable_filetypes = { c = true, cpp = true }
-      if disable_filetypes[vim.bo[bufnr].filetype] then
+      if vim.tbl_contains({ "c", "cpp" }, vim.bo[bufnr].filetype) then
         return
       end
-      return {
-        timeout_ms = 5000,
-        lsp_format = "fallback",
-      }
+      return { timeout_ms = 5000, lsp_format = "fallback" }
     end,
     formatters = {
-      terragrunt_fmt = {
-        command = "terragrunt",
-        args = { "hcl", "format" },
-        stdin = false,
-      },
+      terragrunt_fmt = { command = "terragrunt", args = { "hcl", "format" }, stdin = false },
     },
     formatters_by_ft = {
       lua = { "stylua" },

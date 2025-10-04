@@ -30,21 +30,14 @@ return {
         "fallback",
       },
     },
-
-    appearance = {
-      nerd_font_variant = "mono",
-    },
-
+    appearance = { nerd_font_variant = "mono" },
     completion = {
-      ghost_text = {
-        enabled = true,
-      },
+      ghost_text = { enabled = true },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 500,
       },
     },
-
     sources = {
       default = { "lsp", "path", "snippets", "lazydev", "copilot" },
       providers = {
@@ -60,17 +53,8 @@ return {
         },
       },
     },
-
-    snippets = {
-      preset = "luasnip",
-    },
-
-    fuzzy = {
-      implementation = "lua",
-    },
-
-    signature = {
-      enabled = true,
-    },
+    snippets = { preset = "luasnip" },
+    fuzzy = { implementation = "lua" },
+    signature = { enabled = true },
   },
 }

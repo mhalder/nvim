@@ -140,14 +140,20 @@ return {
       },
     }
 
+    local get_rust_executable = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+    end
+
+    local get_args = function()
+      return vim.split(vim.fn.input("Arguments: "), " ")
+    end
+
     dap.configurations.rust = {
       {
         name = "Launch",
         type = "codelldb",
         request = "launch",
-        program = function()
-          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-        end,
+        program = get_rust_executable,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
         args = {},
@@ -156,15 +162,10 @@ return {
         name = "Launch with args",
         type = "codelldb",
         request = "launch",
-        program = function()
-          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-        end,
+        program = get_rust_executable,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
-        args = function()
-          local args_string = vim.fn.input("Arguments: ")
-          return vim.split(args_string, " ")
-        end,
+        args = get_args,
       },
       {
         name = "Attach to process",
@@ -179,8 +180,7 @@ return {
         request = "launch",
         program = function()
           local result = vim.fn.system("cargo test --no-run --message-format=json")
-          local lines = vim.split(result, "\n")
-          for _, line in ipairs(lines) do
+          for _, line in ipairs(vim.split(result, "\n")) do
             if line ~= "" then
               local ok, json = pcall(vim.json.decode, line)
               if ok and json.executable then
