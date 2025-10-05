@@ -232,4 +232,4 @@ Built with plugins from the amazing Neovim community. Special thanks to:
 
 ## License
 
-Feel free to use and modify this configuration for your own needs.
+This project is licensed under the Beerware License. See the [LICENSE](LICENSE) file for details.
