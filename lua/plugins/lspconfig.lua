@@ -90,6 +90,7 @@ return {
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {
+        ts_ls = {},
         pyright = {},
         bashls = {},
         marksman = {},
@@ -121,6 +122,7 @@ return {
         "hclfmt",
         "prettier",
         "prettierd",
+        "eslint_d",
         "yamlfmt",
         "debugpy",
         "jq",

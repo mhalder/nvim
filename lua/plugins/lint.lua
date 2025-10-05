@@ -9,6 +9,10 @@ return {
       terraform = { "tflint" },
       bash = { "shellcheck" },
       dockerfile = { "hadolint" },
+      javascript = { "eslint_d" },
+      javascriptreact = { "eslint_d" },
+      typescript = { "eslint_d" },
+      typescriptreact = { "eslint_d" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

@@ -194,14 +194,24 @@ Edit `lua/config/keymaps.lua` for general keymaps, or add plugin-specific keymap
 
 ## Language Support
 
-This configuration includes LSP support for multiple languages. Install language servers as needed:
+This configuration includes LSP support for multiple languages with pre-configured servers:
+
+- **TypeScript/JavaScript**: LSP (ts_ls), formatting (prettier/prettierd), linting (eslint_d)
+- **Python**: LSP (pyright), formatting (black, isort), linting (ruff)
+- **Lua**: LSP (lua_ls), formatting (stylua), linting (luacheck)
+- **Bash**: LSP (bashls), formatting (shfmt), linting (shellcheck)
+- **Markdown**: LSP (marksman), formatting (prettier), linting (markdownlint)
+- **Terraform**: LSP (terraformls), formatting (terraform_fmt), linting (tflint)
+- **Ansible**: LSP (ansiblels)
+- **Rust**: Enhanced support via rustacean.nvim
+
+All language servers and tools are automatically installed via Mason on first launch.
+
+Additional language servers can be installed manually:
 
 ```bash
-# Example: Install Lua language server
-:LspInstall lua_ls
+:LspInstall <server_name>
 ```
-
-Common language servers are configured in `lua/plugins/lspconfig.lua`.
 
 ## Updating
 
