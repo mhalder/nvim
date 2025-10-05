@@ -14,7 +14,7 @@ A modern, feature-rich Neovim configuration built with [lazy.nvim](https://githu
 - **Testing**: Integrated test runner with Neotest
 - **Debugging**: DAP support for debugging
 - **AI Assistance**: GitHub Copilot integration
-- **UI Enhancements**: Noice, Which-key, Dressing, and more
+- **UI Enhancements**: Snacks, Noice, Which-key, Dressing, and more
 
 ## Requirements
 
@@ -61,6 +61,7 @@ lazy.nvim will automatically install all plugins on first launch.
 │       ├── lspconfig.lua
 │       ├── blink-cmp.lua
 │       ├── treesitter.lua
+│       ├── snacks.lua
 │       ├── fzf-lua.lua
 │       ├── neo-tree.lua
 │       ├── gitsigns.lua
@@ -145,6 +146,7 @@ Local leader: `\`
 
 ### UI
 
+- **Snacks**: Quality-of-life enhancements (notifications, smooth scrolling, bigfile optimization)
 - **Which-key**: Keymap popup
 - **Noice**: Enhanced UI for messages, cmdline, popupmenu
 - **Dressing**: Better UI for vim.ui.select and vim.ui.input
