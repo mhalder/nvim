@@ -52,3 +52,7 @@ map("n", "<leader>zd", function()
     vim.diagnostic.hide()
   end
 end, { desc = "diagnostics" })
+
+map("n", "<leader>zi", function()
+  require("snacks").toggle.indent():toggle()
+end, { desc = "indent" })
