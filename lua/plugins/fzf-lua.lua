@@ -35,7 +35,7 @@ return {
     { "<leader>fd", "<cmd>FzfLua diagnostics_document<cr>", desc = "diagnostics" },
     { "<leader>fr", "<cmd>FzfLua resume<cr>", desc = "resume" },
     { "<leader>fo", "<cmd>FzfLua oldfiles<cr>", desc = "old files" },
-    { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "buffers" },
+    { "<leader>,", "<cmd>FzfLua buffers<cr>", desc = "buffers" },
     { "<leader>/", "<cmd>FzfLua lgrep_curbuf<cr>", desc = "grep buffer" },
   },
   opts = {},
