@@ -123,6 +123,7 @@ return {
         "prettier",
         "prettierd",
         "eslint_d",
+        "biome",
         "yamlfmt",
         "debugpy",
         "jq",
