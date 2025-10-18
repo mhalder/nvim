@@ -4,8 +4,11 @@ return {
     {
       "<tab>",
       function()
-        return require("sidekick").nes_jump_or_apply()
+        if not require("sidekick").nes_jump_or_apply() then
+          return "<Tab>"
+        end
       end,
+      expr = true,
       mode = "n",
       desc = "jump/apply next edit",
     },
@@ -22,15 +25,32 @@ return {
       function()
         require("sidekick.cli").select({ filter = { installed = true } })
       end,
+      mode = "n",
       desc = "select cli",
     },
     {
-      "<leader>as",
+      "<leader>av",
       function()
-        require("sidekick.cli").send({ selection = true })
+        require("sidekick.cli").send({ msg = "{selection}" })
       end,
-      mode = { "v" },
+      mode = { "x" },
       desc = "send visual selection",
+    },
+    {
+      "<leader>at",
+      function()
+        require("sidekick.cli").send({ msg = "{this}" })
+      end,
+      mode = { "x", "n" },
+      desc = "send this",
+    },
+    {
+      "<leader>af",
+      function()
+        require("sidekick.cli").send({ msg = "{file}" })
+      end,
+      mode = "n",
+      desc = "send file",
     },
     {
       "<leader>ap",
@@ -39,6 +59,14 @@ return {
       end,
       mode = { "n", "v" },
       desc = "select prompt",
+    },
+    {
+      "<leader>ad",
+      function()
+        require("sidekick.cli").close()
+      end,
+      mode = "n",
+      desc = "detach cli session",
     },
     {
       "<c-.>",
@@ -51,9 +79,9 @@ return {
     {
       "<leader>ac",
       function()
-        require("sidekick.cli").toggle({ name = "claude", focus = true })
+        require("sidekick.cli").toggle({ name = "opencode", focus = true })
       end,
-      desc = "claude toggle",
+      desc = "opencode toggle",
       mode = { "n", "v" },
     },
     {

@@ -48,7 +48,7 @@ return {
       bash = { "shfmt" },
       sh = { "shfmt" },
       zsh = { "shfmt" },
-      markdown = { "prettierd", "prettier", "trim_whitespace" },
+      markdown = { "prettierd", "prettier", "trim_whitespace", stop_after_first = true },
       terraform = { "terraform_fmt" },
       hcl = { "terragrunt_fmt" },
       ["yaml.ansible"] = { "ansible-lint" },

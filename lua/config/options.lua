@@ -1,5 +1,9 @@
 local opt = vim.opt
 
+vim.env.PATH = vim.fn.expand("~/.config/nvm/versions/node/v22.20.0/bin") .. ":" .. vim.env.PATH
+
+vim.deprecate = function() end
+
 opt.conceallevel = 2
 opt.fillchars:append({ diff = " " })
 
