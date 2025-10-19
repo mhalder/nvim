@@ -65,13 +65,11 @@ return {
 
     require("mason-nvim-dap").setup({
       automatic_installation = true,
-      handlers = {
-        python = function() end,
-      },
       ensure_installed = {
         "delve",
         "codelldb",
         "js-debug-adapter",
+        "debugpy",
       },
     })
 
@@ -85,8 +83,8 @@ return {
       delve = {},
     })
 
-    local python_path = vim.env.VIRTUAL_ENV and (vim.env.VIRTUAL_ENV .. "/bin/python") or "python"
-    require("dap-python").setup(python_path)
+    -- Use Mason's debugpy installation
+    require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
     local dap_python = require("dap")
 
     dap_python.configurations.python = {
