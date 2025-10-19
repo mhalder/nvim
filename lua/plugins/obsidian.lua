@@ -1,6 +1,7 @@
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*",
+  enabled = false,
   event = {
     "BufReadPre " .. vim.fn.expand("~") .. "/terminus/**.md",
     "BufNewFile " .. vim.fn.expand("~") .. "/terminus/**.md",
@@ -153,7 +154,7 @@ return {
     },
 
     ui = {
-      enable = true,
+      enable = false,
       update_debounce = 200,
       max_file_length = 5000,
       bullets = { char = "•", hl_group = "ObsidianBullet" },
