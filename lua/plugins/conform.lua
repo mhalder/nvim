@@ -40,6 +40,7 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       python = { "isort", "black" },
+      rust = { "rustfmt" },
       json = { "prettierd", "prettier", stop_after_first = true },
       javascript = { "biome" },
       javascriptreact = { "biome" },
