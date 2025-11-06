@@ -26,10 +26,14 @@ Lightweight yet powerful formatter plugin with format-on-save.
 
 - **Lua**: stylua
 - **Python**: isort, black
-- **JSON**: prettierd or prettier
-- **JavaScript/TypeScript**: prettierd or prettier
+- **Rust**: rustfmt
+- **JSON**: prettierd or prettier (stop after first)
+- **JavaScript**: biome
+- **JavaScriptReact**: biome
+- **TypeScript**: biome
+- **TypeScriptReact**: biome
 - **Shell (bash/sh/zsh)**: shfmt
-- **Markdown**: prettierd or prettier, trim_whitespace
+- **Markdown**: prettierd, prettier, trim_whitespace (stop after first)
 - **Terraform**: terraform_fmt
 - **HCL**: terragrunt_fmt
 - **Ansible YAML**: ansible-lint

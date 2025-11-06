@@ -23,7 +23,7 @@ All commands are prefixed with `<leader>f`:
 
 ### Navigation
 
-- `<leader>fb` - Switch buffers
+- `<leader>,` - Switch buffers
 - `<leader>fm` - Jump to marks
 - `<leader>fd` - Browse diagnostics
 

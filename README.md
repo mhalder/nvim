@@ -2,6 +2,18 @@
 
 A modern, feature-rich Neovim configuration built with [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager.
 
+## Documentation
+
+📚 **[Complete Documentation](docs/index.md)** - Start here for comprehensive guides
+
+### Quick Links
+
+- **[Keymaps Reference](docs/keymaps.md)** - All keyboard shortcuts
+- **[Options Reference](docs/options.md)** - All configured settings
+- **[Plugins Overview](docs/plugins.md)** - All installed plugins
+- **[Plugin-Specific Docs](plugin-docs/)** - Detailed plugin documentation
+- **[Vim/Neovim Reference](docs/reference.md)** - General Vim concepts
+
 ## Features
 
 - **LSP Support**: Full Language Server Protocol integration with `nvim-lspconfig`
@@ -13,7 +25,7 @@ A modern, feature-rich Neovim configuration built with [lazy.nvim](https://githu
 - **Code Actions**: Flash motions, autopairs, and mini.nvim utilities
 - **Testing**: Integrated test runner with Neotest
 - **Debugging**: DAP support for debugging
-- **AI Assistance**: GitHub Copilot integration
+- **AI Assistance**: GitHub Copilot and Claude integration
 - **UI Enhancements**: Snacks, Noice, Which-key, Dressing, and more
 
 ## Requirements
@@ -71,52 +83,43 @@ lazy.nvim will automatically install all plugins on first launch.
 
 ## Key Bindings
 
-Leader key: `<Space>`
-Local leader: `\`
+**Leader key**: `<Space>` | **Local leader**: `\`
 
-### General
+> 💡 **Tip**: Press `<leader>fk` to search all keymaps with fzf!
 
-| Key          | Description            |
-| ------------ | ---------------------- |
-| `<leader>jk` | Save file              |
-| `<leader>jj` | Quit                   |
-| `<leader>jl` | Save and quit          |
-| `<leader>j;` | Quit all (no save)     |
-| `<Esc>`      | Clear search highlight |
-| `<C-u>`      | Scroll up (centered)   |
-| `<C-d>`      | Scroll down (centered) |
+### Essential Keymaps
 
-### File Operations
+| Key                | Description         |
+| ------------------ | ------------------- |
+| `<leader><leader>` | Find files          |
+| `<leader>fg`       | Live grep           |
+| `<leader>,`        | Switch buffers      |
+| `<leader>gs`       | Git status          |
+| `<leader>gl`       | LazyGit             |
+| `grn`              | Rename symbol       |
+| `gra`              | Code action         |
+| `grd`              | Go to definition    |
+| `<leader>cf`       | Format code         |
+| `<leader>xx`       | Toggle diagnostics  |
+| `<C-space>`        | Toggle AI assistant |
 
-| Key          | Description         |
-| ------------ | ------------------- |
-| `<leader>lp` | Copy file path      |
-| `<leader>lf` | Copy filename       |
-| `<leader>ls` | Source current file |
-| `<leader>le` | Eval line/selection |
+### Keymap Organization
 
-### Diagnostics
+Keymaps are organized by prefix for easy discovery:
 
-| Key          | Description           |
-| ------------ | --------------------- |
-| `<leader>xf` | Open diagnostic float |
-| `<leader>zd` | Toggle diagnostics    |
+| Prefix      | Category    | Examples                                             |
+| ----------- | ----------- | ---------------------------------------------------- |
+| `<leader>f` | Find/Search | `fg` (grep), `fh` (help), `fk` (keymaps)             |
+| `<leader>g` | Git         | `gs` (status), `gl` (lazygit), `gb` (blame)          |
+| `<leader>h` | Git Hunks   | `hs` (stage), `hr` (reset), `hp` (preview)           |
+| `<leader>d` | Debug       | `db` (breakpoint), `dc` (continue), `di` (step into) |
+| `<leader>t` | Test        | `tt` (run file), `tr` (run nearest), `ts` (summary)  |
+| `<leader>x` | Diagnostics | `xx` (toggle), `xf` (float), `xq` (quickfix)         |
+| `<leader>a` | AI/Sidekick | `aa` (toggle), `ac` (claude), `ap` (prompt)          |
+| `<leader>z` | Toggles     | `zd` (diagnostics), `zf` (format), `zh` (hints)      |
+| `gr`        | LSP         | `grn` (rename), `gra` (action), `grd` (definition)   |
 
-### Terminal
-
-| Key          | Description             |
-| ------------ | ----------------------- |
-| `<leader>yt` | Split terminal          |
-| `<leader>yv` | Vertical split terminal |
-| `<leader>yf` | Fullscreen terminal     |
-| `<Esc><Esc>` | Exit terminal mode      |
-
-### Visual Mode
-
-| Key | Description                   |
-| --- | ----------------------------- |
-| `<` | Indent left (keep selection)  |
-| `>` | Indent right (keep selection) |
+📖 **[Complete Keymaps Reference](docs/keymaps.md)** - See all keybindings
 
 ## Plugin Highlights
 
@@ -164,10 +167,13 @@ Local leader: `\`
 
 ### Specialized
 
-- **Obsidian**: Obsidian vault integration
-- **Markdown-preview**: Live markdown preview
 - **Render-markdown**: Beautiful markdown rendering
 - **Tmux-navigator**: Seamless tmux/vim navigation
+
+### Disabled Plugins
+
+- **Obsidian**: Obsidian vault integration (disabled)
+- **Markdown-preview**: Live markdown preview (disabled)
 
 ## Customization
 
@@ -196,13 +202,16 @@ Edit `lua/config/keymaps.lua` for general keymaps, or add plugin-specific keymap
 
 This configuration includes LSP support for multiple languages with pre-configured servers:
 
-- **TypeScript/JavaScript**: LSP (ts_ls), formatting (prettier/prettierd), linting (eslint_d)
-- **Python**: LSP (pyright), formatting (black, isort), linting (ruff)
+- **TypeScript/JavaScript**: LSP (ts_ls), formatting (prettier/prettierd/biome), linting (eslint_d/biome)
+- **Python**: LSP (pyright), formatting (black, isort), linting (ruff), debugging (debugpy)
 - **Lua**: LSP (lua_ls), formatting (stylua), linting (luacheck)
 - **Bash**: LSP (bashls), formatting (shfmt), linting (shellcheck)
 - **Markdown**: LSP (marksman), formatting (prettier), linting (markdownlint)
-- **Terraform**: LSP (terraformls), formatting (terraform_fmt), linting (tflint)
+- **Terraform**: LSP (terraformls), formatting (hclfmt), linting (tflint)
 - **Ansible**: LSP (ansiblels)
+- **Docker**: Linting (hadolint)
+- **YAML**: Formatting (yamlfmt)
+- **JSON**: Formatting (jq)
 - **Rust**: Enhanced support via rustacean.nvim
 
 All language servers and tools are automatically installed via Mason on first launch.

@@ -32,16 +32,27 @@ All LSP keymaps are prefixed with `gr`:
 
 ## Configured Servers
 
-- lua_ls (Lua)
+- ts_ls (TypeScript/JavaScript)
 - pyright (Python)
 - bashls (Bash)
 - marksman (Markdown)
 - terraformls (Terraform)
 - ansiblels (Ansible)
+- lua_ls (Lua)
 
 ## Tools Installed
 
-stylua, black, isort, shellcheck, shfmt, markdownlint, terraform, luacheck, ruff, tflint, hclfmt, prettier, prettierd, yamlfmt, debugpy, jq, hadolint
+### Formatters
+
+stylua, black, isort, shellcheck, shfmt, markdownlint, terraform, prettier, prettierd, biome, hclfmt, yamlfmt, jq
+
+### Linters
+
+luacheck, ruff, tflint, eslint_d, biome, hadolint, shellcheck
+
+### Debug Adapters
+
+debugpy
 
 ## Configuration
 

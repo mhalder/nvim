@@ -4,14 +4,16 @@ AI assistant integration with Copilot Next Edit Suggestions.
 
 ## Usage
 
-- `<tab>` - Jump to or apply next edit suggestion
+- `<tab>` - Goto/Apply next edit suggestion
+- `<c-space>` - Toggle Sidekick (all modes)
 - `<leader>aa` - Toggle AI CLI
 - `<leader>as` - Select CLI from installed list
-- `<leader>as` - Send visual selection (visual mode)
-- `<leader>ap` - Select prompt
-- `<c-.>` - Switch focus between editor and CLI
+- `<leader>ad` - Detach CLI session
+- `<leader>at` - Send selection/current (normal/visual mode)
+- `<leader>af` - Send file
+- `<leader>av` - Send visual selection (visual mode)
+- `<leader>ap` - Select prompt (normal/visual mode)
 - `<leader>ac` - Toggle Claude CLI with focus
-- `<leader>ai` - Toggle Aider CLI with focus
 
 ## Features
 

@@ -2,6 +2,8 @@
 
 Obsidian note-taking integration for Neovim.
 
+**STATUS: DISABLED** - This plugin is currently disabled (enabled = false in config).
+
 ## Usage
 
 All commands are prefixed with `<leader>o`:

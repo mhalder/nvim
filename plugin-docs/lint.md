@@ -17,6 +17,12 @@ Linting runs automatically on:
 - **Terraform**: tflint
 - **Bash**: shellcheck
 - **Dockerfile**: hadolint
+- **JavaScript**: biomejs
+- **JavaScriptReact**: biomejs
+- **TypeScript**: biomejs
+- **TypeScriptReact**: biomejs
+- **JSON**: biomejs
+- **JSONC**: biomejs
 
 ## Commands
 

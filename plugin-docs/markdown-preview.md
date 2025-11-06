@@ -2,6 +2,8 @@
 
 Markdown preview in the browser.
 
+**STATUS: DISABLED** - This plugin is currently disabled (enabled = false in config).
+
 ## Commands
 
 - `:MarkdownPreview` - Open preview

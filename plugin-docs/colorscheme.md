@@ -2,9 +2,11 @@
 
 A clean, dark Neovim colorscheme with multiple variants.
 
+**Current Active Colorscheme:** habamax (Neovim built-in)
+
 ## Usage
 
-Currently configured to use the `habamax` colorscheme (Neovim default).
+The plugin is installed but configured to use `habamax` instead of tokyonight.
 
 To switch to tokyonight variants:
 

@@ -26,12 +26,40 @@ Debug Adapter Protocol client for debugging applications.
 ## Debuggers
 
 - **delve** - Go
-- **codelldb** - Rust, C, C++
+- **codelldb** - Rust
 - **js-debug-adapter** - TypeScript, JavaScript
-- **debugpy** - Python (via virtual env or system python)
+- **debugpy** - Python
+
+## Debug Configurations
+
+### Python
+
+- File: Debug current file with stopOnEntry
+- File with args: Debug with command line arguments
+- Module: Debug a Python module
+- Module with args: Debug module with arguments
+
+### Rust
+
+- Launch: Debug Rust executable
+- Launch with args: Debug with arguments
+- Attach to process: Attach to running process
+- Launch test: Debug Rust tests
+
+### TypeScript/JavaScript
+
+- Debug Compiled JavaScript: Debug compiled output
+- Debug TypeScript (tsx): Debug using tsx runtime
+- Debug TypeScript (ts-node): Debug using ts-node
+- Debug JavaScript: Debug JavaScript files
+- Attach to Node Process: Attach to running Node process
+
+### Go
+
+- Configured via nvim-dap-go plugin
 
 ## Configuration
 
 Located in: `lua/plugins/debug.lua`
 
-Automatic installation enabled. Python uses VIRTUAL_ENV when available.
+Automatic installation enabled via mason-nvim-dap.
