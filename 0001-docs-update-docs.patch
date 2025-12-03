@@ -1,0 +1,762 @@
+From f9e8866275c18d8a86a481a1e3ad5c1585db0389 Mon Sep 17 00:00:00 2001
+From: Martin Halder <martin.halder@contractors.roche.com>
+Date: Wed, 3 Dec 2025 14:48:36 +0100
+Subject: [PATCH] docs: update docs
+
+---
+ README.md                | 51 ++++++++++++++++++++++++----
+ plugin-docs/blink-cmp.md | 40 ++++++++++++----------
+ plugin-docs/conform.md   | 53 +++++++++++++++--------------
+ plugin-docs/debug.md     | 73 +++++++++++++++++++++-------------------
+ plugin-docs/fzf-lua.md   | 56 +++++++++++++++++-------------
+ plugin-docs/lint.md      | 21 ++++++------
+ plugin-docs/lspconfig.md | 59 ++++++++++++++++----------------
+ plugin-docs/noice.md     | 24 ++++++++-----
+ plugin-docs/sidekick.md  | 32 +++++++++---------
+ plugin-docs/undotree.md  | 42 +++++------------------
+ plugin-docs/which-key.md | 37 ++++++++++++--------
+ 11 files changed, 269 insertions(+), 219 deletions(-)
+
+diff --git a/README.md b/README.md
+index e5d0c11..eb9f9b6 100644
+--- a/README.md
++++ b/README.md
+@@ -25,7 +25,7 @@ A modern, feature-rich Neovim configuration built with [lazy.nvim](https://githu
+ - **Code Actions**: Flash motions, autopairs, and mini.nvim utilities
+ - **Testing**: Integrated test runner with Neotest
+ - **Debugging**: DAP support for debugging
+-- **AI Assistance**: GitHub Copilot and Claude integration
++- **AI Assistance**: GitHub Copilot and Sidekick AI CLI integration
+ - **UI Enhancements**: Snacks, Noice, Which-key, Dressing, and more
+ 
+ ## Requirements
+@@ -78,7 +78,8 @@ lazy.nvim will automatically install all plugins on first launch.
+ │       ├── neo-tree.lua
+ │       ├── gitsigns.lua
+ │       └── ...
+-└── lazy-lock.json           # Plugin version lockfile
++├── docs/                    # Reference documentation
++└── plugin-docs/             # Individual plugin documentation
+ ```
+ 
+ ## Key Bindings
+@@ -119,7 +120,37 @@ Keymaps are organized by prefix for easy discovery:
+ | `<leader>z` | Toggles     | `zd` (diagnostics), `zf` (format), `zh` (hints)      |
+ | `gr`        | LSP         | `grn` (rename), `gra` (action), `grd` (definition)   |
+ 
+-📖 **[Complete Keymaps Reference](docs/keymaps.md)** - See all keybindings
++### Terminal
++
++| Key          | Description             |
++| ------------ | ----------------------- |
++| `<leader>yt` | Split terminal          |
++| `<leader>yv` | Vertical split terminal |
++| `<leader>yf` | Fullscreen terminal     |
++| `<Esc><Esc>` | Exit terminal mode      |
++
++### Toggles
++
++| Key          | Description        |
++| ------------ | ------------------ |
++| `<leader>zd` | Toggle diagnostics |
++| `<leader>zi` | Toggle indent      |
++| `<leader>zf` | Toggle formatting  |
++| `<leader>zb` | Toggle git blame   |
++| `<leader>zh` | Toggle inlay hints |
++
++### Utilities
++
++| Key         | Description     |
++| ----------- | --------------- |
++| `<leader>u` | Toggle undotree |
++
++### Visual Mode
++
++| Key | Description                   |
++| --- | ----------------------------- |
++| `<` | Indent left (keep selection)  |
++| `>` | Indent right (keep selection) |
+ 
+ ## Plugin Highlights
+ 
+@@ -153,7 +184,6 @@ Keymaps are organized by prefix for easy discovery:
+ - **Which-key**: Keymap popup
+ - **Noice**: Enhanced UI for messages, cmdline, popupmenu
+ - **Dressing**: Better UI for vim.ui.select and vim.ui.input
+-- **Indent-blankline**: Indentation guides
+ - **Treesitter-context**: Show context of current function
+ - **Todo-comments**: Highlight TODO, FIXME, etc.
+ 
+@@ -162,11 +192,18 @@ Keymaps are organized by prefix for easy discovery:
+ - **Neotest**: Test runner framework
+ - **DAP**: Debug Adapter Protocol
+ - **Trouble**: Pretty list for diagnostics, references, etc.
+-- **Copilot**: AI pair programming
++- **Undotree**: Visual undo history tree
+ - **Rustacean**: Enhanced Rust development
+ 
++### AI
++
++- **Copilot**: AI pair programming via blink.cmp
++- **Sidekick**: AI CLI integration (Claude, Aider) with tmux
++
+ ### Specialized
+ 
++- **Obsidian**: Obsidian vault integration (disabled by default)
++- **Markdown-preview**: Live markdown preview (disabled by default)
+ - **Render-markdown**: Beautiful markdown rendering
+ - **Tmux-navigator**: Seamless tmux/vim navigation
+ 
+@@ -202,8 +239,8 @@ Edit `lua/config/keymaps.lua` for general keymaps, or add plugin-specific keymap
+ 
+ This configuration includes LSP support for multiple languages with pre-configured servers:
+ 
+-- **TypeScript/JavaScript**: LSP (ts_ls), formatting (prettier/prettierd/biome), linting (eslint_d/biome)
+-- **Python**: LSP (pyright), formatting (black, isort), linting (ruff), debugging (debugpy)
++- **TypeScript/JavaScript**: LSP (ts_ls), formatting (biome), linting (biomejs)
++- **Python**: LSP (pyright), formatting (black, isort), linting (ruff)
+ - **Lua**: LSP (lua_ls), formatting (stylua), linting (luacheck)
+ - **Bash**: LSP (bashls), formatting (shfmt), linting (shellcheck)
+ - **Markdown**: LSP (marksman), formatting (prettier), linting (markdownlint)
+diff --git a/plugin-docs/blink-cmp.md b/plugin-docs/blink-cmp.md
+index d8554f2..c9f6501 100644
+--- a/plugin-docs/blink-cmp.md
++++ b/plugin-docs/blink-cmp.md
+@@ -8,32 +8,36 @@ Completion menu appears automatically while typing in insert mode.
+ 
+ ## Keymaps
+ 
+-### Default Preset
+-
+-- `<C-y>` - Accept completion
+-- `<C-n>` / `<C-p>` - Next/previous item
+-- `<Up>` / `<Down>` - Next/previous item
+-- `<C-space>` - Open menu or docs
+-- `<C-e>` - Hide menu
+-- `<C-k>` - Toggle signature help
+-- `<C-f>` - Scroll documentation down
+-- `<C-b>` - Scroll documentation up
+-- `<Tab>` - Next snippet field / sidekick suggestion
++| Key         | Description                        |
++| ----------- | ---------------------------------- |
++| `<C-y>`     | Accept completion                  |
++| `<C-n>`     | Next item                          |
++| `<C-p>`     | Previous item                      |
++| `<C-space>` | Open menu or docs                  |
++| `<C-e>`     | Hide menu                          |
++| `<C-k>`     | Toggle signature help              |
++| `<C-f>`     | Scroll documentation down          |
++| `<C-b>`     | Scroll documentation up            |
++| `<M-CR>`    | Accept and fallback                |
++| `<Tab>`     | Next snippet field / sidekick jump |
+ 
+ ## Completion Sources
+ 
+-- LSP
+-- Path
+-- Snippets (LuaSnip)
+-- Lazydev (Neovim Lua API)
+-- Copilot
++| Source   | Description                 |
++| -------- | --------------------------- |
++| LSP      | Language server completions |
++| Path     | File path completions       |
++| Snippets | LuaSnip snippets            |
++| Lazydev  | Neovim Lua API completions  |
++| Copilot  | AI-powered suggestions      |
+ 
+ ## Features
+ 
+-- Ghost text preview
++- Ghost text preview (enabled)
+ - Automatic documentation popup (500ms delay)
+-- Signature help
++- Signature help (enabled)
+ - Lua-based fuzzy matching
++- Sidekick NES integration via Tab
+ 
+ ## Configuration
+ 
+diff --git a/plugin-docs/conform.md b/plugin-docs/conform.md
+index 4cbfa39..ea99c9b 100644
+--- a/plugin-docs/conform.md
++++ b/plugin-docs/conform.md
+@@ -4,40 +4,41 @@ Lightweight yet powerful formatter plugin with format-on-save.
+ 
+ ## Usage
+ 
+-- `<leader>cf` - Format current buffer
++| Key          | Description           |
++| ------------ | --------------------- |
++| `<leader>cf` | Format current buffer |
++| `<leader>zf` | Toggle format-on-save |
+ 
+ ## Commands
+ 
+-- `:ConformInfo` - Show formatter information for current buffer
+-- `:FormatEnable` - Enable autoformat on save globally
+-- `:FormatEnable!` - Enable autoformat on save for current buffer only
+-- `:FormatDisable` - Disable autoformat on save globally
+-- `:FormatDisable!` - Disable autoformat on save for current buffer only
+-- `:FormatToggle` - Toggle autoformat on save globally
+-- `:FormatToggle!` - Toggle autoformat on save for current buffer only
+-
+-## Toggles
+-
+-- `<leader>zf` - Formatting on save
++| Command           | Description                                   |
++| ----------------- | --------------------------------------------- |
++| `:ConformInfo`    | Show formatter info for current buffer        |
++| `:FormatEnable`   | Enable autoformat on save globally            |
++| `:FormatEnable!`  | Enable autoformat on save for current buffer  |
++| `:FormatDisable`  | Disable autoformat on save globally           |
++| `:FormatDisable!` | Disable autoformat on save for current buffer |
++| `:FormatToggle`   | Toggle autoformat on save globally            |
++| `:FormatToggle!`  | Toggle autoformat on save for current buffer  |
+ 
+ ## Configured Formatters
+ 
+ ### Language-specific
+ 
+-- **Lua**: stylua
+-- **Python**: isort, black
+-- **Rust**: rustfmt
+-- **JSON**: prettierd or prettier (stop after first)
+-- **JavaScript**: biome
+-- **JavaScriptReact**: biome
+-- **TypeScript**: biome
+-- **TypeScriptReact**: biome
+-- **Shell (bash/sh/zsh)**: shfmt
+-- **Markdown**: prettierd, prettier, trim_whitespace (stop after first)
+-- **Terraform**: terraform_fmt
+-- **HCL**: terragrunt_fmt
+-- **Ansible YAML**: ansible-lint
+-- **YAML**: yamlfmt
++| Language            | Formatter(s)                         |
++| ------------------- | ------------------------------------ |
++| Lua                 | stylua                               |
++| Python              | isort, black                         |
++| Rust                | rustfmt                              |
++| JSON                | prettierd, prettier                  |
++| JavaScript/JSX      | biome                                |
++| TypeScript/TSX      | biome                                |
++| Shell (bash/sh/zsh) | shfmt                                |
++| Markdown            | prettierd, prettier, trim_whitespace |
++| Terraform           | terraform_fmt                        |
++| HCL                 | terragrunt_fmt                       |
++| Ansible YAML        | ansible-lint                         |
++| YAML                | yamlfmt                              |
+ 
+ ### Format on Save
+ 
+diff --git a/plugin-docs/debug.md b/plugin-docs/debug.md
+index 9837367..33c4382 100644
+--- a/plugin-docs/debug.md
++++ b/plugin-docs/debug.md
+@@ -4,59 +4,64 @@ Debug Adapter Protocol client for debugging applications.
+ 
+ ## Usage
+ 
+-- `<leader>dc` - Continue debugging
+-- `<leader>di` - Step into
+-- `<leader>do` - Step over
+-- `<leader>du` - Step out
+-- `<leader>db` - Toggle breakpoint
+-- `<leader>dt` - Terminate debugger
+-- `<leader>dr` - Toggle debug UI
++| Key          | Description        |
++| ------------ | ------------------ |
++| `<leader>dc` | Continue debugging |
++| `<leader>di` | Step into          |
++| `<leader>do` | Step over          |
++| `<leader>du` | Step out           |
++| `<leader>db` | Toggle breakpoint  |
++| `<leader>dt` | Terminate debugger |
++| `<leader>dr` | Toggle debug UI    |
+ 
+ ## Features
+ 
+-- DAP client with UI
++- DAP client with UI (nvim-dap-ui)
+ - Automatic debugger installation via Mason
+-- Go debugging with delve
+-- Python debugging with debugpy
+-- Rust debugging with codelldb
+-- TypeScript/JavaScript debugging with js-debug-adapter
+-- Support for file, module, and attach modes
+ - Auto-opens UI on debug start
++- Auto-closes UI on debug end
+ 
+-## Debuggers
++## Language Support
+ 
+-- **delve** - Go
+-- **codelldb** - Rust
+-- **js-debug-adapter** - TypeScript, JavaScript
+-- **debugpy** - Python
++### Go
+ 
+-## Debug Configurations
++- Debugger: delve
++- Launch file or attach to process
+ 
+ ### Python
+ 
+-- File: Debug current file with stopOnEntry
+-- File with args: Debug with command line arguments
+-- Module: Debug a Python module
+-- Module with args: Debug module with arguments
++- Debugger: debugpy (via Mason)
++- Configurations:
++  - File (with stop on entry)
++  - File with args
++  - Module
++  - Module with args
+ 
+ ### Rust
+ 
+-- Launch: Debug Rust executable
+-- Launch with args: Debug with arguments
+-- Attach to process: Attach to running process
+-- Launch test: Debug Rust tests
++- Debugger: codelldb
++- Configurations:
++  - Launch binary
++  - Launch with args
++  - Attach to process
++  - Launch tests
+ 
+ ### TypeScript/JavaScript
+ 
+-- Debug Compiled JavaScript: Debug compiled output
+-- Debug TypeScript (tsx): Debug using tsx runtime
+-- Debug TypeScript (ts-node): Debug using ts-node
+-- Debug JavaScript: Debug JavaScript files
+-- Attach to Node Process: Attach to running Node process
++- Debugger: js-debug-adapter (pwa-node)
++- Configurations:
++  - Debug compiled JavaScript
++  - Debug TypeScript (tsx)
++  - Debug TypeScript (ts-node)
++  - Debug JavaScript
++  - Attach to Node process
+ 
+-### Go
++## Installed Debuggers
+ 
+-- Configured via nvim-dap-go plugin
++- **delve** - Go
++- **codelldb** - Rust
++- **js-debug-adapter** - TypeScript, JavaScript
++- **debugpy** - Python
+ 
+ ## Configuration
+ 
+diff --git a/plugin-docs/fzf-lua.md b/plugin-docs/fzf-lua.md
+index eccee8d..8d8bf19 100644
+--- a/plugin-docs/fzf-lua.md
++++ b/plugin-docs/fzf-lua.md
+@@ -4,46 +4,56 @@ Fuzzy finder for files, grep, buffers, and more.
+ 
+ ## Usage
+ 
+-All commands are prefixed with `<leader>f`:
+-
+ ### File Finding
+ 
+-- `<leader><leader>` - Find files in current directory
+-- `<leader>fn` - Find files in Neovim config
+-- `<leader>fc` - Find files in ~/.config
+-- `<leader>fp` - Find files in plugins directory
+-- `<leader>fo` - Old/recent files
++| Key                | Description                     |
++| ------------------ | ------------------------------- |
++| `<leader><leader>` | Find files in current directory |
++| `<leader>fn`       | Find files in Neovim config     |
++| `<leader>fc`       | Find files in ~/.config         |
++| `<leader>fp`       | Find files in plugins directory |
++| `<leader>fo`       | Old/recent files                |
+ 
+ ### Search
+ 
+-- `<leader>fg` - Live grep (search in files)
+-- `<leader>fw` - Grep word under cursor
+-- `<leader>fW` - Grep WORD under cursor
+-- `<leader>/` - Grep in current buffer
++| Key          | Description                 |
++| ------------ | --------------------------- |
++| `<leader>fg` | Live grep (search in files) |
++| `<leader>fw` | Grep word under cursor      |
++| `<leader>fW` | Grep WORD under cursor      |
++| `<leader>/`  | Grep in current buffer      |
+ 
+ ### Navigation
+ 
+-- `<leader>,` - Switch buffers
+-- `<leader>fm` - Jump to marks
+-- `<leader>fd` - Browse diagnostics
++| Key          | Description        |
++| ------------ | ------------------ |
++| `<leader>,`  | Switch buffers     |
++| `<leader>fm` | Jump to marks      |
++| `<leader>fd` | Browse diagnostics |
+ 
+ ### Help
+ 
+-- `<leader>fh` - Search help tags
+-- `<leader>fk` - Search keymaps
+-- `<leader>fz` - Browse all fzf builtin pickers
++| Key          | Description                    |
++| ------------ | ------------------------------ |
++| `<leader>fh` | Search help tags               |
++| `<leader>fk` | Search keymaps                 |
++| `<leader>fz` | Browse all fzf builtin pickers |
+ 
+ ### Other
+ 
+-- `<leader>fr` - Resume last picker
++| Key          | Description        |
++| ------------ | ------------------ |
++| `<leader>fr` | Resume last picker |
+ 
+ ## Inside FZF
+ 
+-- `Ctrl-n/p` or `↓/↑` - Navigate items
+-- `Enter` - Select item
+-- `Ctrl-c` or `Esc` - Close
+-- `Tab` - Mark multiple items
+-- `Ctrl-/` - Toggle preview
++| Key            | Description         |
++| -------------- | ------------------- |
++| `Ctrl-n/p`     | Navigate items      |
++| `Enter`        | Select item         |
++| `Ctrl-c`/`Esc` | Close               |
++| `Tab`          | Mark multiple items |
++| `Ctrl-/`       | Toggle preview      |
+ 
+ ## Configuration
+ 
+diff --git a/plugin-docs/lint.md b/plugin-docs/lint.md
+index 0dd1b64..a3fc5e4 100644
+--- a/plugin-docs/lint.md
++++ b/plugin-docs/lint.md
+@@ -12,17 +12,16 @@ Linting runs automatically on:
+ 
+ ## Configured Linters
+ 
+-- **Markdown**: markdownlint
+-- **Python**: ruff
+-- **Terraform**: tflint
+-- **Bash**: shellcheck
+-- **Dockerfile**: hadolint
+-- **JavaScript**: biomejs
+-- **JavaScriptReact**: biomejs
+-- **TypeScript**: biomejs
+-- **TypeScriptReact**: biomejs
+-- **JSON**: biomejs
+-- **JSONC**: biomejs
++| Language       | Linter       |
++| -------------- | ------------ |
++| Markdown       | markdownlint |
++| Python         | ruff         |
++| Terraform      | tflint       |
++| Bash           | shellcheck   |
++| Dockerfile     | hadolint     |
++| JavaScript/JSX | biomejs      |
++| TypeScript/TSX | biomejs      |
++| JSON/JSONC     | biomejs      |
+ 
+ ## Commands
+ 
+diff --git a/plugin-docs/lspconfig.md b/plugin-docs/lspconfig.md
+index f8d626e..d25a532 100644
+--- a/plugin-docs/lspconfig.md
++++ b/plugin-docs/lspconfig.md
+@@ -4,55 +4,54 @@ Language Server Protocol (LSP) configuration for code intelligence features.
+ 
+ ## Features
+ 
+-- Code completion
++- Code completion (via blink.cmp)
+ - Go to definition
+ - Find references
+ - Rename symbols
+ - Code actions
+ - Diagnostics
++- Inlay hints
+ 
+ ## LSP Keymaps
+ 
+ All LSP keymaps are prefixed with `gr`:
+ 
+-- `grn` - Rename symbol
+-- `gra` - Code action
+-- `grr` - Find references
+-- `gri` - Go to implementation
+-- `grd` - Go to definition
+-- `grD` - Go to declaration
+-- `gO` - Document symbols
+-- `gW` - Workspace symbols
++| Key   | Description              |
++| ----- | ------------------------ |
++| `grn` | Rename symbol            |
++| `gra` | Code action (n, x modes) |
++| `grr` | Find references          |
++| `gri` | Go to implementation     |
++| `grd` | Go to definition         |
++| `grD` | Go to declaration        |
++| `gO`  | Document symbols         |
++| `gW`  | Workspace symbols        |
+ 
+ ## Other Keymaps
+ 
+-- `<leader>xf` - Show diagnostic float
+-- `<leader>zd` - Toggle diagnostics
+-- `<leader>zh` - Toggle inlay hints
++| Key          | Description           |
++| ------------ | --------------------- |
++| `<leader>xf` | Show diagnostic float |
++| `<leader>zd` | Toggle diagnostics    |
++| `<leader>zh` | Toggle inlay hints    |
+ 
+ ## Configured Servers
+ 
+-- ts_ls (TypeScript/JavaScript)
+-- pyright (Python)
+-- bashls (Bash)
+-- marksman (Markdown)
+-- terraformls (Terraform)
+-- ansiblels (Ansible)
+-- lua_ls (Lua)
++| Server      | Language              |
++| ----------- | --------------------- |
++| ts_ls       | TypeScript/JavaScript |
++| pyright     | Python                |
++| lua_ls      | Lua                   |
++| bashls      | Bash                  |
++| marksman    | Markdown              |
++| terraformls | Terraform             |
++| ansiblels   | Ansible               |
+ 
+-## Tools Installed
++Note: Rust uses rustaceanvim (not configured here).
+ 
+-### Formatters
++## Tools Installed via Mason
+ 
+-stylua, black, isort, shellcheck, shfmt, markdownlint, terraform, prettier, prettierd, biome, hclfmt, yamlfmt, jq
+-
+-### Linters
+-
+-luacheck, ruff, tflint, eslint_d, biome, hadolint, shellcheck
+-
+-### Debug Adapters
+-
+-debugpy
++stylua, black, isort, shellcheck, shfmt, markdownlint, terraform, luacheck, ruff, tflint, hclfmt, prettier, prettierd, eslint_d, biome, yamlfmt, debugpy, jq, hadolint
+ 
+ ## Configuration
+ 
+diff --git a/plugin-docs/noice.md b/plugin-docs/noice.md
+index 5dfb9a5..f25089d 100644
+--- a/plugin-docs/noice.md
++++ b/plugin-docs/noice.md
+@@ -4,14 +4,16 @@ Experimental UI replacement for messages, cmdline, and popupmenu.
+ 
+ ## Usage
+ 
+-- `<S-Enter>` - Redirect cmdline (in command mode)
+-- `<leader>nl` - Show last message
+-- `<leader>nh` - Show message history
+-- `<leader>na` - Show all messages
+-- `<leader>nd` - Dismiss messages
+-- `<leader>np` - Message picker
+-- `<c-f>` - Scroll forward in LSP hover
+-- `<c-b>` - Scroll backward in LSP hover
++| Key          | Mode  | Description                 |
++| ------------ | ----- | --------------------------- |
++| `<S-Enter>`  | c     | Redirect cmdline            |
++| `<leader>nl` | n     | Show last message           |
++| `<leader>nh` | n     | Show message history        |
++| `<leader>na` | n     | Show all messages           |
++| `<leader>nd` | n     | Dismiss messages            |
++| `<leader>np` | n     | Message picker              |
++| `<c-f>`      | i,n,s | Scroll forward in LSP docs  |
++| `<c-b>`      | i,n,s | Scroll backward in LSP docs |
+ 
+ ## Features
+ 
+@@ -23,6 +25,12 @@ Experimental UI replacement for messages, cmdline, and popupmenu.
+ - Message routing and filtering
+ - Markdown rendering for LSP
+ 
++## Presets
++
++- Bottom search enabled
++- Command palette mode
++- Long message split
++
+ ## Configuration
+ 
+ Located in: `lua/plugins/noice.lua`
+diff --git a/plugin-docs/sidekick.md b/plugin-docs/sidekick.md
+index ecfeb26..8b25f4b 100644
+--- a/plugin-docs/sidekick.md
++++ b/plugin-docs/sidekick.md
+@@ -1,28 +1,30 @@
+ # sidekick.nvim
+ 
+-AI assistant integration with Copilot Next Edit Suggestions.
++AI CLI assistant integration with Next Edit Suggestions (NES).
+ 
+ ## Usage
+ 
+-- `<tab>` - Goto/Apply next edit suggestion
+-- `<c-space>` - Toggle Sidekick (all modes)
+-- `<leader>aa` - Toggle AI CLI
+-- `<leader>as` - Select CLI from installed list
+-- `<leader>ad` - Detach CLI session
+-- `<leader>at` - Send selection/current (normal/visual mode)
+-- `<leader>af` - Send file
+-- `<leader>av` - Send visual selection (visual mode)
+-- `<leader>ap` - Select prompt (normal/visual mode)
+-- `<leader>ac` - Toggle Claude CLI with focus
++| Key          | Mode    | Description                           |
++| ------------ | ------- | ------------------------------------- |
++| `<tab>`      | n       | Jump to or apply next edit suggestion |
++| `<c-space>`  | n,t,i,x | Toggle Sidekick CLI                   |
++| `<leader>aa` | n       | Toggle Sidekick CLI                   |
++| `<leader>as` | n       | Select CLI from available list        |
++| `<leader>ad` | n       | Detach CLI session                    |
++| `<leader>at` | n,x     | Send this (code context)              |
++| `<leader>af` | n       | Send file                             |
++| `<leader>av` | x       | Send visual selection                 |
++| `<leader>ap` | n,x     | Select prompt                         |
++| `<leader>ac` | n       | Toggle Claude CLI with focus          |
+ 
+ ## Features
+ 
+-- Copilot Next Edit Suggestions (NES) integration
+-- Multiple AI CLI support (Claude, Aider)
++- Next Edit Suggestions (NES) integration
++- Multiple AI CLI support (Claude, Aider, etc.)
+ - Tmux multiplexer backend
+-- Visual selection sending
++- Send code context, files, or selections to AI
+ - Context-aware prompt selection
+-- Seamless focus switching
++- Seamless focus switching between editor and CLI
+ 
+ ## Configuration
+ 
+diff --git a/plugin-docs/undotree.md b/plugin-docs/undotree.md
+index 3a27951..b1d4e58 100644
+--- a/plugin-docs/undotree.md
++++ b/plugin-docs/undotree.md
+@@ -1,46 +1,22 @@
+ # undotree
+ 
+-Visualize and navigate undo history as a tree structure.
++Visual undo history tree viewer.
+ 
+ ## Usage
+ 
+-- `<leader>u` - Toggle undotree
+-
+-## Commands
+-
+-- `:UndotreeToggle` - Toggle the undo tree panel
+-- `:UndotreeShow` - Show the undo tree panel
+-- `:UndotreeHide` - Hide the undo tree panel
+-- `:UndotreeFocus` - Focus the undo tree panel
++| Key         | Description     |
++| ----------- | --------------- |
++| `<leader>u` | Toggle undotree |
+ 
+ ## Features
+ 
+-- Visual representation of undo branches
+-- Navigate through undo history
+-- Preview changes before applying
+-- Persistent undo support
+-- Time travel through file changes
+-- See file diffs for each undo state
+-
+-## How It Works
+-
+-The undo tree shows all changes as a tree structure, where:
+-- Each node represents a file state
+-- Branches show where you made different changes
+-- You can navigate to any previous state
+-- Changes are never lost (unlike linear undo)
+-
+-## Navigation in Undotree
+-
+-- `j/k` - Navigate up/down the tree
+-- `Enter` - Restore to selected state
+-- `u` - Undo
+-- `Ctrl-r` - Redo
+-- `?` - Toggle help
+-- `q` - Close undotree
++- Visual representation of undo history
++- Navigate and restore previous states
++- View diff between undo states
++- Persistent undo across sessions (when undofile is enabled)
+ 
+ ## Configuration
+ 
+ Located in: `lua/plugins/undotree.lua`
+ 
+-Uses Neovim's built-in persistent undo feature (`undofile` option).
++Lazy-loaded on the `UndotreeToggle` command.
+diff --git a/plugin-docs/which-key.md b/plugin-docs/which-key.md
+index 826982f..9cb4285 100644
+--- a/plugin-docs/which-key.md
++++ b/plugin-docs/which-key.md
+@@ -8,20 +8,29 @@ Press `<leader>` and wait briefly - a popup will show all available keybindings.
+ 
+ ## Key Groups
+ 
+-- `<leader>c` - code actions
+-- `<leader>d` - debug
+-- `<leader>f` - find/search
+-- `<leader>g` - git operations
+-- `<leader>h` - git hunks
+-- `<leader>j` - exit/quit commands
+-- `<leader>l` - lua operations
+-- `<leader>o` - obsidian notes
+-- `<leader>r` - harpoon navigation
+-- `<leader>x` - diagnostics
+-- `<leader>y` - floatterm
+-- `<leader>z` - toggles
+-- `gr` - LSP operations
+-- `gs` - surround operations
++| Prefix      | Group          |
++| ----------- | -------------- |
++| `<leader>a` | AI             |
++| `<leader>c` | Code actions   |
++| `<leader>d` | Debug          |
++| `<leader>f` | Find/search    |
++| `<leader>g` | Git operations |
++| `<leader>h` | Git hunks      |
++| `<leader>j` | Exit/quit      |
++| `<leader>l` | Lua operations |
++| `<leader>o` | Obsidian notes |
++| `<leader>r` | Harpoon        |
++| `<leader>x` | Diagnostics    |
++| `<leader>y` | Terminal       |
++| `<leader>z` | Toggles        |
++| `gr`        | LSP            |
++| `gs`        | Surround       |
++
++## Features
++
++- Zero delay popup
++- Icon support (Nerd Font)
++- Visual mode key groups
+ 
+ ## Configuration
+ 
+-- 
+2.51.0
+

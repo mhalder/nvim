@@ -8,32 +8,36 @@ Completion menu appears automatically while typing in insert mode.
 
 ## Keymaps
 
-### Default Preset
-
-- `<C-y>` - Accept completion
-- `<C-n>` / `<C-p>` - Next/previous item
-- `<Up>` / `<Down>` - Next/previous item
-- `<C-space>` - Open menu or docs
-- `<C-e>` - Hide menu
-- `<C-k>` - Toggle signature help
-- `<C-f>` - Scroll documentation down
-- `<C-b>` - Scroll documentation up
-- `<Tab>` - Next snippet field / sidekick suggestion
+| Key         | Description                        |
+| ----------- | ---------------------------------- |
+| `<C-y>`     | Accept completion                  |
+| `<C-n>`     | Next item                          |
+| `<C-p>`     | Previous item                      |
+| `<C-space>` | Open menu or docs                  |
+| `<C-e>`     | Hide menu                          |
+| `<C-k>`     | Toggle signature help              |
+| `<C-f>`     | Scroll documentation down          |
+| `<C-b>`     | Scroll documentation up            |
+| `<M-CR>`    | Accept and fallback                |
+| `<Tab>`     | Next snippet field / sidekick jump |
 
 ## Completion Sources
 
-- LSP
-- Path
-- Snippets (LuaSnip)
-- Lazydev (Neovim Lua API)
-- Copilot
+| Source   | Description                 |
+| -------- | --------------------------- |
+| LSP      | Language server completions |
+| Path     | File path completions       |
+| Snippets | LuaSnip snippets            |
+| Lazydev  | Neovim Lua API completions  |
+| Copilot  | AI-powered suggestions      |
 
 ## Features
 
-- Ghost text preview
+- Ghost text preview (enabled)
 - Automatic documentation popup (500ms delay)
-- Signature help
+- Signature help (enabled)
 - Lua-based fuzzy matching
+- Sidekick NES integration via Tab
 
 ## Configuration
 

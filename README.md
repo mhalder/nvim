@@ -25,7 +25,7 @@ A modern, feature-rich Neovim configuration built with [lazy.nvim](https://githu
 - **Code Actions**: Flash motions, autopairs, and mini.nvim utilities
 - **Testing**: Integrated test runner with Neotest
 - **Debugging**: DAP support for debugging
-- **AI Assistance**: GitHub Copilot and Claude integration
+- **AI Assistance**: GitHub Copilot and Sidekick AI CLI integration
 - **UI Enhancements**: Snacks, Noice, Which-key, Dressing, and more
 
 ## Requirements
@@ -78,7 +78,8 @@ lazy.nvim will automatically install all plugins on first launch.
 │       ├── neo-tree.lua
 │       ├── gitsigns.lua
 │       └── ...
-└── lazy-lock.json           # Plugin version lockfile
+├── docs/                    # Reference documentation
+└── plugin-docs/             # Individual plugin documentation
 ```
 
 ## Key Bindings
@@ -119,7 +120,37 @@ Keymaps are organized by prefix for easy discovery:
 | `<leader>z` | Toggles     | `zd` (diagnostics), `zf` (format), `zh` (hints)      |
 | `gr`        | LSP         | `grn` (rename), `gra` (action), `grd` (definition)   |
 
-📖 **[Complete Keymaps Reference](docs/keymaps.md)** - See all keybindings
+### Terminal
+
+| Key          | Description             |
+| ------------ | ----------------------- |
+| `<leader>yt` | Split terminal          |
+| `<leader>yv` | Vertical split terminal |
+| `<leader>yf` | Fullscreen terminal     |
+| `<Esc><Esc>` | Exit terminal mode      |
+
+### Toggles
+
+| Key          | Description        |
+| ------------ | ------------------ |
+| `<leader>zd` | Toggle diagnostics |
+| `<leader>zi` | Toggle indent      |
+| `<leader>zf` | Toggle formatting  |
+| `<leader>zb` | Toggle git blame   |
+| `<leader>zh` | Toggle inlay hints |
+
+### Utilities
+
+| Key         | Description     |
+| ----------- | --------------- |
+| `<leader>u` | Toggle undotree |
+
+### Visual Mode
+
+| Key | Description                   |
+| --- | ----------------------------- |
+| `<` | Indent left (keep selection)  |
+| `>` | Indent right (keep selection) |
 
 ## Plugin Highlights
 
@@ -153,7 +184,6 @@ Keymaps are organized by prefix for easy discovery:
 - **Which-key**: Keymap popup
 - **Noice**: Enhanced UI for messages, cmdline, popupmenu
 - **Dressing**: Better UI for vim.ui.select and vim.ui.input
-- **Indent-blankline**: Indentation guides
 - **Treesitter-context**: Show context of current function
 - **Todo-comments**: Highlight TODO, FIXME, etc.
 
@@ -162,11 +192,18 @@ Keymaps are organized by prefix for easy discovery:
 - **Neotest**: Test runner framework
 - **DAP**: Debug Adapter Protocol
 - **Trouble**: Pretty list for diagnostics, references, etc.
-- **Copilot**: AI pair programming
+- **Undotree**: Visual undo history tree
 - **Rustacean**: Enhanced Rust development
+
+### AI
+
+- **Copilot**: AI pair programming via blink.cmp
+- **Sidekick**: AI CLI integration (Claude, Aider) with tmux
 
 ### Specialized
 
+- **Obsidian**: Obsidian vault integration (disabled by default)
+- **Markdown-preview**: Live markdown preview (disabled by default)
 - **Render-markdown**: Beautiful markdown rendering
 - **Tmux-navigator**: Seamless tmux/vim navigation
 
@@ -202,8 +239,8 @@ Edit `lua/config/keymaps.lua` for general keymaps, or add plugin-specific keymap
 
 This configuration includes LSP support for multiple languages with pre-configured servers:
 
-- **TypeScript/JavaScript**: LSP (ts_ls), formatting (prettier/prettierd/biome), linting (eslint_d/biome)
-- **Python**: LSP (pyright), formatting (black, isort), linting (ruff), debugging (debugpy)
+- **TypeScript/JavaScript**: LSP (ts_ls), formatting (biome), linting (biomejs)
+- **Python**: LSP (pyright), formatting (black, isort), linting (ruff)
 - **Lua**: LSP (lua_ls), formatting (stylua), linting (luacheck)
 - **Bash**: LSP (bashls), formatting (shfmt), linting (shellcheck)
 - **Markdown**: LSP (marksman), formatting (prettier), linting (markdownlint)

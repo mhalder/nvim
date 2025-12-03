@@ -1,28 +1,30 @@
 # sidekick.nvim
 
-AI assistant integration with Copilot Next Edit Suggestions.
+AI CLI assistant integration with Next Edit Suggestions (NES).
 
 ## Usage
 
-- `<tab>` - Goto/Apply next edit suggestion
-- `<c-space>` - Toggle Sidekick (all modes)
-- `<leader>aa` - Toggle AI CLI
-- `<leader>as` - Select CLI from installed list
-- `<leader>ad` - Detach CLI session
-- `<leader>at` - Send selection/current (normal/visual mode)
-- `<leader>af` - Send file
-- `<leader>av` - Send visual selection (visual mode)
-- `<leader>ap` - Select prompt (normal/visual mode)
-- `<leader>ac` - Toggle Claude CLI with focus
+| Key          | Mode    | Description                           |
+| ------------ | ------- | ------------------------------------- |
+| `<tab>`      | n       | Jump to or apply next edit suggestion |
+| `<c-space>`  | n,t,i,x | Toggle Sidekick CLI                   |
+| `<leader>aa` | n       | Toggle Sidekick CLI                   |
+| `<leader>as` | n       | Select CLI from available list        |
+| `<leader>ad` | n       | Detach CLI session                    |
+| `<leader>at` | n,x     | Send this (code context)              |
+| `<leader>af` | n       | Send file                             |
+| `<leader>av` | x       | Send visual selection                 |
+| `<leader>ap` | n,x     | Select prompt                         |
+| `<leader>ac` | n       | Toggle Claude CLI with focus          |
 
 ## Features
 
-- Copilot Next Edit Suggestions (NES) integration
-- Multiple AI CLI support (Claude, Aider)
+- Next Edit Suggestions (NES) integration
+- Multiple AI CLI support (Claude, Aider, etc.)
 - Tmux multiplexer backend
-- Visual selection sending
+- Send code context, files, or selections to AI
 - Context-aware prompt selection
-- Seamless focus switching
+- Seamless focus switching between editor and CLI
 
 ## Configuration
 

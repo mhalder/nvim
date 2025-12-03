@@ -12,17 +12,16 @@ Linting runs automatically on:
 
 ## Configured Linters
 
-- **Markdown**: markdownlint
-- **Python**: ruff
-- **Terraform**: tflint
-- **Bash**: shellcheck
-- **Dockerfile**: hadolint
-- **JavaScript**: biomejs
-- **JavaScriptReact**: biomejs
-- **TypeScript**: biomejs
-- **TypeScriptReact**: biomejs
-- **JSON**: biomejs
-- **JSONC**: biomejs
+| Language       | Linter       |
+| -------------- | ------------ |
+| Markdown       | markdownlint |
+| Python         | ruff         |
+| Terraform      | tflint       |
+| Bash           | shellcheck   |
+| Dockerfile     | hadolint     |
+| JavaScript/JSX | biomejs      |
+| TypeScript/TSX | biomejs      |
+| JSON/JSONC     | biomejs      |
 
 ## Commands
 

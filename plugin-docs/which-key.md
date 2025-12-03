@@ -8,20 +8,29 @@ Press `<leader>` and wait briefly - a popup will show all available keybindings.
 
 ## Key Groups
 
-- `<leader>c` - code actions
-- `<leader>d` - debug
-- `<leader>f` - find/search
-- `<leader>g` - git operations
-- `<leader>h` - git hunks
-- `<leader>j` - exit/quit commands
-- `<leader>l` - lua operations
-- `<leader>o` - obsidian notes
-- `<leader>r` - harpoon navigation
-- `<leader>x` - diagnostics
-- `<leader>y` - floatterm
-- `<leader>z` - toggles
-- `gr` - LSP operations
-- `gs` - surround operations
+| Prefix      | Group          |
+| ----------- | -------------- |
+| `<leader>a` | AI             |
+| `<leader>c` | Code actions   |
+| `<leader>d` | Debug          |
+| `<leader>f` | Find/search    |
+| `<leader>g` | Git operations |
+| `<leader>h` | Git hunks      |
+| `<leader>j` | Exit/quit      |
+| `<leader>l` | Lua operations |
+| `<leader>o` | Obsidian notes |
+| `<leader>r` | Harpoon        |
+| `<leader>x` | Diagnostics    |
+| `<leader>y` | Terminal       |
+| `<leader>z` | Toggles        |
+| `gr`        | LSP            |
+| `gs`        | Surround       |
+
+## Features
+
+- Zero delay popup
+- Icon support (Nerd Font)
+- Visual mode key groups
 
 ## Configuration
 

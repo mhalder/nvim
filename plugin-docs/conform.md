@@ -4,40 +4,41 @@ Lightweight yet powerful formatter plugin with format-on-save.
 
 ## Usage
 
-- `<leader>cf` - Format current buffer
+| Key          | Description           |
+| ------------ | --------------------- |
+| `<leader>cf` | Format current buffer |
+| `<leader>zf` | Toggle format-on-save |
 
 ## Commands
 
-- `:ConformInfo` - Show formatter information for current buffer
-- `:FormatEnable` - Enable autoformat on save globally
-- `:FormatEnable!` - Enable autoformat on save for current buffer only
-- `:FormatDisable` - Disable autoformat on save globally
-- `:FormatDisable!` - Disable autoformat on save for current buffer only
-- `:FormatToggle` - Toggle autoformat on save globally
-- `:FormatToggle!` - Toggle autoformat on save for current buffer only
-
-## Toggles
-
-- `<leader>zf` - Formatting on save
+| Command           | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `:ConformInfo`    | Show formatter info for current buffer        |
+| `:FormatEnable`   | Enable autoformat on save globally            |
+| `:FormatEnable!`  | Enable autoformat on save for current buffer  |
+| `:FormatDisable`  | Disable autoformat on save globally           |
+| `:FormatDisable!` | Disable autoformat on save for current buffer |
+| `:FormatToggle`   | Toggle autoformat on save globally            |
+| `:FormatToggle!`  | Toggle autoformat on save for current buffer  |
 
 ## Configured Formatters
 
 ### Language-specific
 
-- **Lua**: stylua
-- **Python**: isort, black
-- **Rust**: rustfmt
-- **JSON**: prettierd or prettier (stop after first)
-- **JavaScript**: biome
-- **JavaScriptReact**: biome
-- **TypeScript**: biome
-- **TypeScriptReact**: biome
-- **Shell (bash/sh/zsh)**: shfmt
-- **Markdown**: prettierd, prettier, trim_whitespace (stop after first)
-- **Terraform**: terraform_fmt
-- **HCL**: terragrunt_fmt
-- **Ansible YAML**: ansible-lint
-- **YAML**: yamlfmt
+| Language            | Formatter(s)                         |
+| ------------------- | ------------------------------------ |
+| Lua                 | stylua                               |
+| Python              | isort, black                         |
+| Rust                | rustfmt                              |
+| JSON                | prettierd, prettier                  |
+| JavaScript/JSX      | biome                                |
+| TypeScript/TSX      | biome                                |
+| Shell (bash/sh/zsh) | shfmt                                |
+| Markdown            | prettierd, prettier, trim_whitespace |
+| Terraform           | terraform_fmt                        |
+| HCL                 | terragrunt_fmt                       |
+| Ansible YAML        | ansible-lint                         |
+| YAML                | yamlfmt                              |
 
 ### Format on Save
 
