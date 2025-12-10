@@ -19,8 +19,8 @@ return {
   opts = {
     keymap = {
       preset = "default",
-      ["<C-f>"] = { "scroll_documentation_down" },
-      ["<C-b>"] = { "scroll_documentation_up" },
+      ["<M-j>"] = { "scroll_documentation_down" },
+      ["<M-k>"] = { "scroll_documentation_up" },
       ["<M-CR>"] = { "accept", "fallback" },
       ["<Tab>"] = {
         "snippet_forward",

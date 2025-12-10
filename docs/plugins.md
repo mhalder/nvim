@@ -340,7 +340,7 @@ Better diagnostics, references, and quickfix list.
 **Purpose:** Completion engine
 **Config:** `lua/plugins/blink-cmp.lua`
 **Docs:** [plugin-docs/blink-cmp.md](../plugin-docs/blink-cmp.md)
-**Main Keymaps:** `<Tab>`, `<M-CR>`, `<C-f>`, `<C-b>`
+**Main Keymaps:** `<Tab>`, `<M-CR>`, `<M-j>`, `<M-k>`
 
 Fast completion engine with LSP, snippets, and path completion.
 

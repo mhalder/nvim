@@ -178,8 +178,8 @@ Complete reference of all keyboard shortcuts in this Neovim configuration.
 
 | Key      | Mode | Description                         |
 | -------- | ---- | ----------------------------------- |
-| `<C-f>`  | i    | Scroll completion docs down         |
-| `<C-b>`  | i    | Scroll completion docs up           |
+| `<M-j>`  | i    | Scroll completion docs down         |
+| `<M-k>`  | i    | Scroll completion docs up           |
 | `<M-CR>` | i    | Accept completion                   |
 | `<Tab>`  | i    | Snippet forward / Accept suggestion |
 
