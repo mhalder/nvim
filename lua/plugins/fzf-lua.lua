@@ -38,5 +38,15 @@ return {
     { "<leader>,", "<cmd>FzfLua buffers<cr>", desc = "buffers" },
     { "<leader>/", "<cmd>FzfLua lgrep_curbuf<cr>", desc = "grep buffer" },
   },
-  opts = {},
+  opts = {
+    actions = {
+      files = {
+        ["alt-q"] = function(selected, opts)
+          require("fzf-lua").actions.file_sel_to_qf(selected, opts)
+          vim.cmd("cclose")
+          vim.cmd("Trouble qflist open")
+        end,
+      },
+    },
+  },
 }
