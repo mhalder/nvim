@@ -15,6 +15,11 @@ return {
       },
     })
 
+    require("mini.bufremove").setup()
+    vim.keymap.set("n", "<leader>bd", function()
+      require("mini.bufremove").delete(0, false)
+    end, { desc = "delete buffer" })
+
     local statusline = require("mini.statusline")
     statusline.setup({ use_icons = vim.g.have_nerd_font })
 

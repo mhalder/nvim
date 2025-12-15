@@ -41,6 +41,7 @@ return {
   opts = {
     actions = {
       files = {
+        true,
         ["alt-q"] = function(selected, opts)
           require("fzf-lua").actions.file_sel_to_qf(selected, opts)
           vim.cmd("cclose")
