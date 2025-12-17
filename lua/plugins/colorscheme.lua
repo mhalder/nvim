@@ -8,6 +8,6 @@ return {
       },
     })
 
-    vim.cmd.colorscheme("habamax")
+    vim.cmd.colorscheme("tokyonight-night")
   end,
 }

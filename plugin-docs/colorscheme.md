@@ -2,16 +2,17 @@
 
 A clean, dark Neovim colorscheme with multiple variants.
 
-**Current Active Colorscheme:** habamax (Neovim built-in)
+**Current Active Colorscheme:** tokyonight-night
 
 ## Usage
 
-The plugin is installed but configured to use `habamax` instead of tokyonight.
+The plugin is installed and configured to use `tokyonight-night`.
 
-To switch to tokyonight variants:
+Available tokyonight variants:
 
 ```lua
 vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("tokyonight-night")
 vim.cmd.colorscheme("tokyonight-storm")
 vim.cmd.colorscheme("tokyonight-moon")
 vim.cmd.colorscheme("tokyonight-day")
@@ -21,4 +22,4 @@ vim.cmd.colorscheme("tokyonight-day")
 
 Located in: `lua/plugins/colorscheme.lua`
 
-Comments are disabled in the main plugin file.
+Italic comments are disabled in the configuration.

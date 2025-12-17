@@ -9,7 +9,7 @@ All plugins are managed by [lazy.nvim](https://github.com/folke/lazy.nvim).
 - **obsidian.nvim** - Disabled (enabled = false)
 - **markdown-preview.nvim** - Disabled (enabled = false)
 
-**Active Colorscheme:** habamax (not tokyonight)
+**Active Colorscheme:** tokyonight-night
 
 ## Table of Contents
 
@@ -489,9 +489,9 @@ Integration with Claude AI assistant for code help.
 **Purpose:** Colorscheme
 **Config:** `lua/plugins/colorscheme.lua`
 **Docs:** [plugin-docs/colorscheme.md](../plugin-docs/colorscheme.md)
-**Status:** Installed but using habamax colorscheme
+**Status:** Active (tokyonight-night variant)
 
-Modern colorscheme. Currently configured to use habamax instead of tokyonight.
+Modern colorscheme with multiple variants. Currently using the tokyonight-night variant.
 
 ### dressing
 
